@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinySync.Core", "TinySync.Core\TinySync.Core.csproj", "{52DF5219-AA90-459E-95AC-085066C8C729}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinySync.Server", "TinySync.Server\TinySync.Server.csproj", "{A04D2D31-6F39-4505-A23D-160BEA1D0DC1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{52DF5219-AA90-459E-95AC-085066C8C729}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52DF5219-AA90-459E-95AC-085066C8C729}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52DF5219-AA90-459E-95AC-085066C8C729}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52DF5219-AA90-459E-95AC-085066C8C729}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A04D2D31-6F39-4505-A23D-160BEA1D0DC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A04D2D31-6F39-4505-A23D-160BEA1D0DC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A04D2D31-6F39-4505-A23D-160BEA1D0DC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A04D2D31-6F39-4505-A23D-160BEA1D0DC1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
