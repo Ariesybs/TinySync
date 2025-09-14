@@ -36,6 +36,10 @@ ScaffoldingReadMe.txt
 # NuGet Symbol Packages
 *.snupkg
 
+# JetBrains Rider
+.idea/
+*.sln.iml
+
 # Others
 ~$*
 *~
