@@ -3,7 +3,7 @@
 轻量级、房间制的实时同步服务端。基于 .NET 8 与 LiteNetLib/ASP.NET Core，提供低延迟的 UDP 同步能力与简洁的 HTTP 控制接口，适合小游戏、原型验证、教学与小型多人实时互动场景。
 
 ### 演示
-![TinySync 演示](TinySyncDemo.gif)
+![TinySync 演示](docs/TinySyncDemo.gif)
 
 ### 特性
 - **轻量与易部署**：.NET 单一进程即可运行。
