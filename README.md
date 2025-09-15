@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/TinySyncLogo.png" alt="TinySync Logo" width="720" />
+</p>
+
 ## TinySync
 
 轻量级、房间制的实时同步服务端。基于 .NET 8 与 LiteNetLib/ASP.NET Core，提供低延迟的 UDP 同步能力与简洁的 HTTP 控制接口，适合小游戏、原型验证、教学与小型多人实时互动场景。
