@@ -87,10 +87,18 @@ dotnet publish TinySync.Server -c Release -o out
 ### 许可协议
 选择并添加合适的开源许可证（例如 MIT/Apache-2.0）。在仓库根目录放置 `LICENSE` 文件。
 
-### 致谢
+### 致谢（依赖与选型说明）
 - [LiteNetLib](https://github.com/RevenantX/LiteNetLib)
+  - 面向 .NET 的高性能 UDP 网络库，提供可靠 UDP、顺序/不排序通道、事件驱动模型与 NAT 打洞等能力。
+  - 选择理由：API 简洁、延迟低、部署轻量，非常契合房间制的实时同步与快速原型需求。
 - [MemoryPack](https://github.com/Cysharp/MemoryPack)
+  - 使用 Source Generator 的高性能序列化库，零拷贝/低分配，序列化体积小、速度快，AOT 友好。
+  - 选择理由：显著降低网络负载与 GC 压力，便于在 .NET/Unity 等环境中获得稳定帧率与带宽占用。
 - [ASP.NET Core](https://github.com/dotnet/aspnetcore)
+  - 现代化 Web 框架，内置路由、中间件、依赖注入与托管模型，适合构建轻量 HTTP API。
+  - 选择理由：官方、稳定、生态完善，用于暴露房间管理等控制面与后续运维接口。
 - [NLog](https://github.com/NLog/NLog)
+  - 功能丰富的日志库，支持多目标、异步写入、滚动策略与灵活配置。
+  - 选择理由：配置与落地简单，便于在开发/生产环境快速定位问题与保留审计信息。
 
 
