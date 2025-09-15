@@ -84,8 +84,6 @@ dotnet publish TinySync.Server -c Release -o out
   - 定点数库的接入
   - 网络波动的优化（抖动/丢包/延迟抖动处理）
 
-### 许可协议
-选择并添加合适的开源许可证（例如 MIT/Apache-2.0）。在仓库根目录放置 `LICENSE` 文件。
 
 ### 致谢
 - [LiteNetLib](https://github.com/RevenantX/LiteNetLib)
