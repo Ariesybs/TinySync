@@ -36,7 +36,6 @@ public class Room
 	public int OwnerId { get; set; }
 	public int MaxPlayers { get; set; }
 	public uint CurrentFrame { get; private set; }
-	public bool IsStartGame { get; private set; } = false;
 	public int PlayerCount { get; private set; }
 
 	// 初始化房间
@@ -193,7 +192,7 @@ public class Room
 		if (input.TargetFrame < CurrentFrame)
 		{
 			// 输入帧迟到，丢弃
-			Log.Debug($"Input[{input.PlayerId}] is later than current frame.hope {CurrentFrame} but {input.TargetFrame}");
+			// Log.Debug($"Input[{input.PlayerId}] is later than current frame.hope {CurrentFrame} but {input.TargetFrame}");
 			return;
 		}
 		if (input.TargetFrame == CurrentFrame)
@@ -205,7 +204,7 @@ public class Room
 		if (input.TargetFrame > CurrentFrame)
 		{
 			// 输入帧提前到达,缓存
-			Log.Debug($"Input[{input.PlayerId}] is earlier than current frame.hope {CurrentFrame} but {input.TargetFrame}");
+			// Log.Debug($"Input[{input.PlayerId}] is earlier than current frame.hope {CurrentFrame} but {input.TargetFrame}");
 			var frameDict = m_PlayerInputsBuffer.GetOrAdd(input.TargetFrame,
 				_ => new ConcurrentDictionary<int, RoomMessage.PlayerInput>());
 			frameDict.AddOrUpdate(input.PlayerId, input, (_, __) => input);
@@ -236,7 +235,7 @@ public class Room
 		m_NextTick = DateTime.UtcNow + m_TickInterval; // 让第一帧在一个间隔后触发，避免“连发”
 		_ = Task.Run((() =>
 		{
-			while (m_IsStartFrameSynced && IsStartGame)
+			while (m_IsStartFrameSynced)
 			{
 				UpdateFrame();
 				Thread.Sleep(1);
@@ -284,14 +283,13 @@ public class Room
 			};
 		}
 		
-		
-
 		// 广播当前帧，然后清空缓存并进入下一帧
 		var playerInputsBufferArray = m_CurrentPlayersInput.Values.ToArray();
 		BroadcastFrame(CurrentFrame, playerInputsBufferArray);
 		m_PlayersHistoryInputs.Enqueue(playerInputsBufferArray);
 		m_CurrentPlayersInput.Clear();
 		CurrentFrame++;
+		Log.Debug($"Synced Frame[{CurrentFrame}]");
 		// Console.WriteLine("Frame[{0}] Broadcasted.", CurrentFrame);
 	}
 	

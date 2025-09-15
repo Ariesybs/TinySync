@@ -15,13 +15,14 @@ namespace TinySync.Server
                 RegisterExitHandlers();
                 // 初始化日志
                 LogManager.Initialize();
+                // 初始化房间管理器
+                RoomManager.Initialize();
                 // 初始化网络连接
                 var tasks = new List<Task>()
                 {
                     NetworkManager.StartAsync(m_CancellationTokenSource)
                 };
-                // 初始化房间管理器
-                RoomManager.Initialize();
+                
                 await Task.WhenAll(tasks);
             }
             catch (Exception e)

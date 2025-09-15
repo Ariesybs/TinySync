@@ -26,6 +26,7 @@ public static class RoomManager
     }
     private static void OnPeerReceiveEvent(NetPeer peer, NetPacketReader reader, byte m_Channel, DeliveryMethod m_DeliveryMethod)
     {
+        // Log.Debug($"Receive message from {peer.Id}");
         var msgType = reader.GetInt();
         var len = reader.AvailableBytes;
         var data = new byte[len];
@@ -46,6 +47,7 @@ public static class RoomManager
             }
             case MsgType.ServerMsg:
             {
+                Log.Debug($"Receive ServerMsg from {peer.Id}");
                 var serverMessage = MemoryPackSerializer.Deserialize<ServerMessage>(data);
                 if(serverMessage == null)return;
                 switch (serverMessage.MsgType)
@@ -54,6 +56,7 @@ public static class RoomManager
                         var hello = MemoryPackSerializer.Deserialize<ServerMessage.HelloServer>(serverMessage.Payload);
                         if (hello == null) return;
                         var playerId = hello.PlayerId;
+                        Log.Info($"Player {playerId} connect to server");
                         m_playerIdToNetPeer.TryAdd(playerId, peer);
                         break;
                 }
@@ -80,13 +83,12 @@ public static class RoomManager
 
     private static void OnPeerConnected(NetPeer peer)
     {
-        
+        Log.Debug($"Peer {peer.Id} connected");
     }
 
     private static void OnPeerDisconnected(NetPeer peer, DisconnectInfo info)
     {
-        
-
+        Log.Debug($"Peer {peer.Id} disconnected");
     }
 
     public static (bool, int, string) CreateRoom(int playerId, int netPeerId,int maxPlayers)
@@ -99,17 +101,18 @@ public static class RoomManager
         }
         m_RoomId++;
         Log.Info($"playerId:{playerId} request create room[{m_RoomId}]");
-        var room = new Room(m_RoomId, 30,playerId,maxPlayers);
-        var addSuccess = m_GameRooms.TryAdd(m_RoomId, room);
-        if (!addSuccess)
-        {
-            return (false, -1, $"create room[{m_RoomId}] failed");
-        }
+        
         var ok = m_playerIdToNetPeer.TryGetValue(playerId, out var netPeer);
         if (!ok || netPeer == null)
         {
             Log.Info($"NetPeer not found");
             return (false,-1,$"please connect udp server first");
+        }
+        var room = new Room(m_RoomId, 30,playerId,maxPlayers);
+        var addSuccess = m_GameRooms.TryAdd(m_RoomId, room);
+        if (!addSuccess)
+        {
+            return (false, -1, $"create room[{m_RoomId}] failed");
         }
         room.AddOrUpdatePlayer(playerId, netPeer);
         m_PlayerBelongs.TryAdd(playerId, room);

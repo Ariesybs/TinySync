@@ -90,6 +90,7 @@ public static class NetworkManager
                 while (net.IsRunning && !cts.IsCancellationRequested)
                 {
                     net.PollEvents();
+                    // Log.Debug($"UDP Server loop");
                     await Task.Delay(1, cts.Token);
                 }
             }
@@ -100,6 +101,11 @@ public static class NetworkManager
         });
         
         await Task.CompletedTask;
+    }
+
+    private static void OnPeerConnectedEvents(NetPeer peer)
+    {
+        Log.Debug($"Peer connected: {peer.Id}");
     }
 
     public static int GetHttpPort()
