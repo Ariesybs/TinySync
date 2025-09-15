@@ -87,7 +87,7 @@ dotnet publish TinySync.Server -c Release -o out
 ### 许可协议
 选择并添加合适的开源许可证（例如 MIT/Apache-2.0）。在仓库根目录放置 `LICENSE` 文件。
 
-### 致谢（依赖与选型说明）
+### 致谢
 - [LiteNetLib](https://github.com/RevenantX/LiteNetLib)
   - 面向 .NET 的高性能 UDP 网络库，提供可靠 UDP、顺序/不排序通道、事件驱动模型与 NAT 打洞等能力。
 - [MemoryPack](https://github.com/Cysharp/MemoryPack)
